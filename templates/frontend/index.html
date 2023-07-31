@@ -1,0 +1,375 @@
+{% extends '../base.html' %}
+
+{% block title %} | Home {% endblock %}
+{% block content %}
+
+{% load static %}
+
+
+<!-- Banner start -->
+<!-- Log on to codeastro.com for more projects -->
+<div class="banner" id="banner">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner banner-slider-inner text-center">
+            <div class="carousel-item banner-max-height active item-bg">
+                <img class="d-block w-100 h-100" src="{% static 'img/banner-2.jpg' %}" alt="banner">
+                <div class="carousel-content container banner-info-2 bi-2 text-left">
+                
+                    <h3>Medical Equipments</h3>
+                    <h5>We Sale high value and very reliable medical equipments</h5>
+                    <a href="" class="btn btn-lg btn-theme">Get Started</a>
+                </div>
+            </div>
+            <div class="carousel-item banner-max-height item-bg">
+                <img class="d-block w-100 h-100" src="{% static 'img/banner-1.jpg' %}" alt="banner">
+                <div class="carousel-content container banner-info-2 bi-2 text-left">
+                    <h3>Medical Equipment</h3>
+                    <h5>We Sale high value and very reliable medical equipments</h5>
+                    <a href="" class="btn btn-lg btn-theme">Get Started</a>
+                </div>
+            </div>
+            <div class="carousel-item banner-max-height item-bg">
+                <img class="d-block w-100 h-100" src="{% static 'img/banner-4.jpg' %}" alt="banner">
+                <div class="carousel-content container banner-info-2 bi-2 text-left">
+                    <h3>Medical Equipment</h3>
+                    <h5>We Sale high value and very reliable medical equipments</h5>
+                    <a href="" class="btn btn-lg btn-theme">Get Started</a>
+                </div>
+            </div>
+            <div class="carousel-item banner-max-height item-bg">
+                <img class="d-block w-100 h-100" src="{% static 'img/banner-5.jpg' %}" alt="banner">
+                <div class="carousel-content container banner-info-2 bi-2 text-left">
+                    <h3>Medical Equipment</h3>
+                    <h5>We Sale high value and very reliable medical equipments</h5>
+                    <a href="" class="btn btn-lg btn-theme">Get Started</a>
+                </div>
+            </div>
+        </div>
+        <!-- Search box 3 start -->
+        <div class="search-box-4 sb-8">
+            <form action="" method="">
+                <div class="form-group">
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-bold">Email Address</label>
+                        <input type="email" name="email" class="form-control search-fields" id="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label fw-bold">Password</label>
+                        <input type="password" name="password" class="form-control search-fields" id="password">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <button class="btn btn-block button-theme btn-md">
+                        <i class="fa fa-filter"></i> Login
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- Search box 3 end -->
+        <a class="carousel-control-prev none-580" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="slider-mover-left" aria-hidden="true">
+                <i class="fa fa-angle-left"></i>
+            </span>
+        </a>
+        <a class="carousel-control-next none-580" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="slider-mover-right" aria-hidden="true">
+                <i class="fa fa-angle-right"></i>
+            </span>
+        </a>
+		<!-- Log on to codeastro.com for more projects -->
+    </div>
+</div>
+<!-- Banner end -->
+
+<!-- Search box 2 end -->
+
+<!-- about -->
+<section id="about-neph">
+    <div class="container-fluid py-4">
+        <!-- <h1 class="text-center text-white">INTRODUCTION</h1>
+        <p class="text-white">Amongst many of our available cars, here are some few picks that you might have an interest in.</p> -->
+        <div class="row gx-5">
+            <div class="col-md-6 lolo">
+                <img src="{% static 'img/ab-1.jpg' %}" class="img-fluid rounded-pill shadow " style="opacity: 0.3;">
+            </div>
+            <div class="col-md-6 ">
+                <h2 class=" text-white">INTRODUCTION</h2>
+                <p class="text-white">
+                    Okeke med equip is a company specialized in the sale of new and reconditioned medical equipment. We help you throughout the realization of your project according to your needs.
+                    From inception, we have been established as a leading medical supplies company in the world through outstanding reliability and customer service delivery. Our competencies have got us exclusive distribution rights to some medical brands in the world. This privilege positions us to negotiate extremely competitive prices with our suppliers enabling you to enjoy a quality product at the best possible price. All our Medical Devices are tested and controlled for your safety and comfort. We Provide you with a worldwide delivery.
+                </p>
+                <h2 class="text-white">Our Mission</h2>
+                <p class="text-white">Our mission is to be the one-stop-shop for the procurement and supplies of any kind of medical and healthcare equipment, as well as remain the sought after Medical and Healthcare projects management consultancy firm in the world.</p>
+            </div>
+
+        </div>
+        
+        
+
+    </div>
+</section>
+<!-- about end -->
+
+<!-- Featured car start -->
+<div class="featured-car content-area-5">
+    <div class="container">
+        <!-- Main title -->
+        <div class="main-title">
+            <h1 class="text-white">Featured <span>Products</span></h1>
+            <p class="text-white">Amongst many of our available cars, here are some few picks that you might have an interest in.</p>
+        </div>
+        <!-- Slick slider area start -->
+        <div class="slick-slider-area clearfix">
+            <div class="row slick-carousel" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+              {% for product in featured_products %}
+                <div class="slick-slide-item">
+                    <div class="car-box-3">
+                        <div class="car-thumbnail">
+                            <a href="" class="car-img">
+                                <div class="tag-2">Featured</div>
+                                <div class="price-box">
+                                    <span>${{product.price}}</span>
+                                </div>
+                                {% for imgg in product.media.all %}
+                                    {% if imgg.is_top %}
+                                    <img class="d-block w-100" src="{{imgg.image.url}}" alt="car" style="min-height: 262px; max-height: 262px;">
+                                    {% endif %}
+                                {% endfor %}
+                            </a>
+                            <div class="carbox-overlap-wrapper">
+                                <div class="overlap-box">
+                                    <div class="overlap-btns-area">
+                                        <div class="car-magnify-gallery">
+                                            {% for imgg in product.media.all %}
+                                                {% if imgg.is_top %}        
+                                                <a href="{{imgg.image.url}}" class="overlap-btn">
+                                                    <i class="fa fa-expand"></i>
+                                                    <img class="hidden" src="{{imgg.image.url}}">
+                                                </a>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            {% if car.car_photo_1 %}
+                                            <a href="{{car.car_photo_1.url}}" class="hidden">
+                                                <img class="hidden" src="{{car.car_photo_1.url}}">
+                                            </a>
+                                            {% endif %}
+                                            {% if car.car_photo_2 %}
+                                            <a href="{{car.car_photo_2.url}}" class="hidden">
+                                                <img class="hidden" src="{{car.car_photo_2.url}}">
+                                            </a>
+                                            {% endif %}
+                                            {% if car.car_photo_3 %}
+                                            <a href="{{car.car_photo_3.url}}" class="hidden">
+                                                <img class="hidden" src="{{car.car_photo_3.url}}">
+                                            </a>
+                                            {% endif %}
+                                            {% if car.car_photo_4 %}
+                                            <a href="{{car.car_photo_4.url}}" class="hidden">
+                                                <img class="hidden" src="{{car.car_photo_4.url}}">
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						<!-- Log on to codeastro.com for more projects -->
+                        <div class="detail">
+                            <h1 class="title">
+                                <a href="">{{ product.title}}</a>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            </div>
+            <div class="slick-btn">
+                <div class="slick-prev slick-arrow-buton sab-4">
+                    <i class="fa fa-angle-left"></i>
+                </div>
+                <div class="slick-next slick-arrow-buton sab-3">
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Featured car end -->
+
+<!-- about -->
+<section id="somthing-else">
+    <div class="container-fluid py-4">
+        <!-- <h1 class="text-center text-white">INTRODUCTION</h1>
+        <p class="text-white">Amongst many of our available cars, here are some few picks that you might have an interest in.</p> -->
+        <div class="row gx-5">
+            
+            <div class="col-md-6 ">
+                <h2 class=" text-white">OUR SERVICES</h2>
+                <p class="text-white">
+                    We add that extra touch by not only providing quality medical products and services but also updating our clients with the most recent advances in medical technology for optimal performance. This extra touch defines our commitment to bring novel technological solutions to your doorstep. Our services to Hospitals, Tertiary Institution, Laboratories, and health professionals include:
+                    <ul class="text-white">
+                        <li>1. Medical Sales & Shipment</li>
+                        <li>2. Medical Equipment Installation</li>
+                        <li>3. Aftersales Support</li>
+                        <li>4. Medical Device Training</li>
+                    </ul>
+                </p>
+                <p class="text-white">We strive to be your favourite service provider in all scientific health care products. <br>Get a quotation for medical equipment that suits your application. <br>
+                Also we guarantee quality service and after sales support to all our clients.</p>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'img/city.jpg' %}" class="img-fluid rounded-pill shadow" style="opacity: 0.3;">
+            </div>
+
+        </div>
+        
+        
+
+    </div>
+</section>
+<!-- about end -->
+
+<!-- Rent car start -->
+<div class="featured-car content-area">
+    <div class="container">
+        <!-- Main title -->
+        <div class="main-title">
+            <h1>Available <span>Products</span></h1>
+            <p></p>
+        </div>
+        <div class="row">
+          {% for product in products %}
+            <div class="col-lg-4 col-md-6">
+                <div class="car-box">
+                    <div class="car-thumbnail">
+                        <a href="" class="car-img">
+                            <div class="tag">For Sale</div>
+                            <div class="price-box">
+                                <span>${{product.price}}</span>
+                            </div>
+                            {% for imgg in product.media.all %}
+                                {% if imgg.is_top %}
+                                <img class="d-block w-100" src="{{imgg.image.url}}" alt="car" style="min-height: 262px; max-height: 262px;">
+                                {% endif %}
+                            {% endfor %}
+                        </a>
+
+                        <div class="carbox-overlap-wrapper">
+                            <div class="overlap-box">
+                                <div class="overlap-btns-area">
+                                    <div class="car-magnify-gallery">
+                                        {% for imgg in product.media.all %}
+                                            {% if imgg.is_top %}    
+                                            <a href="{{imgg.image.url}}" class="overlap-btn">
+                                                <i class="fa fa-expand"></i>
+                                                <img class="hidden" src="{{imgg.image.url}}">
+                                            </a>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        {% if car.car_photo_1 %}
+                                        <a href="{{car.car_photo_1.url}}" class="hidden">
+                                            <img class="hidden" src="{{car.car_photo_1.url}}">
+                                        </a>
+                                        {% endif %}
+                                        {% if car.car_photo_2 %}
+                                        <a href="{{car.car_photo_2.url}}" class="hidden">
+                                            <img class="hidden" src="{{car.car_photo_2.url}}">
+                                        </a>
+                                        {% endif %}
+                                        {% if car.car_photo_3 %}
+                                        <a href="{{car.car_photo_3.url}}" class="hidden">
+                                            <img class="hidden" src="{{car.car_photo_3.url}}">
+                                        </a>
+                                        {% endif %}
+                                        {% if car.car_photo_4 %}
+                                        <a href="{{car.car_photo_4.url}}" class="hidden">
+                                            <img class="hidden" src="{{car.car_photo_4.url}}">
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="detail">
+                        <h1 class="title">
+                            <a href="">{{product.title}}</a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+          {% endfor %}
+
+        </div>
+    </div>
+</div>
+<!-- Rent car end -->
+
+
+<!-- Our team start -->
+<div class="our-team content-area bg-grea-3">
+    <div class="container">
+        <!-- Main title -->
+        <div class="main-title">
+            <h1>Executive <span>Team</span></h1>
+            <p>Team working behind maintaining the quality of our Car Dealership Website.</p>
+        </div>
+        <!-- Slick slider area start -->
+        <div class="slick-slider-area clearfix">
+            <div class="row slick-carousel" data-slick='{"slidesToShow": 4, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+              {% for team in teams %}
+                <div class="slick-slide-item">
+                    <div class="team-1">
+                        <div class="photo">
+                            <a href="#">
+                                <img src="{{ team.photo.url }}" alt="team-1" class="img-fluid">
+                            </a>
+                            <div class="social-list clearfix">
+                                <a href="{{team.facebook_link}}" target="_blank" class="facebook-bg"><i class="fa fa-facebook"></i></a>
+                                <a href="{{team.twitter_link}}" target="_blank" class="twitter-bg"><i class="fa fa-twitter"></i></a>
+                                <a href="{{team.google_plus_link}}" target="_blank" class="google-bg"><i class="fa fa-google"></i></a>
+                            </div>
+                        </div>
+                        <div class="details">
+                            <h4><a href="#">{{team.first_name}} {{team.last_name}}</a></h4>
+                            <h5>{{team.designation}}</h5>
+                        </div>
+                    </div>
+                </div>
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Our team end -->
+
+<!-- Intro section start -->
+<div class="intro-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-8 col-sm-12">
+                <div class="intro-text">
+                    <h3>Do You Have Questions ?</h3>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <a href="" class="btn btn-md">Get in Touch</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Log on to codeastro.com for more projects -->
+<!-- Intro section end -->
+
+
+
+
+
+
+
+{% endblock %}

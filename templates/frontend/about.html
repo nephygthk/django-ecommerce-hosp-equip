@@ -1,0 +1,152 @@
+{% extends '../base.html' %}
+
+{% block title %} | About Us {% endblock %}
+{% block content %}
+
+{% load static %}
+
+<!-- Sub banner start -->
+<!-- Log on to codeastro.com for more projects -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>About Us</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'frontend:home' %}">Home</a></li>
+                <li class="active">About Us</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<!-- Service center strat -->
+<div class="about-car content-area-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-6">
+                <div class="about-car-photo">
+                    <div id="carDetailsSlider" class="carousel car-details-sliders slide">
+                        <!-- main slider carousel items -->
+                        <div class="carousel-inner">
+                            <div class="active item carousel-item" data-slide-number="0">
+                                <img src="{% static 'img/med-1.jpg' %}" class="img-fluid" alt="slider-car">
+                            </div>
+                            <div class="item carousel-item" data-slide-number="1">
+                                <img src="{% static 'img/med-2.jpg' %}" class="img-fluid" alt="slider-car">
+                            </div>
+                            <div class="item carousel-item" data-slide-number="2">
+                                <img src="{% static 'img/med-3.jpg' %}" class="img-fluid" alt="slider-car">
+                            </div>
+                        </div>
+                        <!-- main slider carousel nav controls -->
+                        <ul class="carousel-indicators car-properties list-inline nav nav-justified">
+                            <li class="list-inline-item active">
+                                <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#carDetailsSlider">
+                                    <img src="{% static 'img/med-1.jpg' %}" class="img-fluid" alt="small-car">
+                                </a>
+                            </li>
+							<!-- Log on to codeastro.com for more projects -->
+                            <li class="list-inline-item">
+                                <a id="carousel-selector-1" data-slide-to="1" data-target="#carDetailsSlider">
+                                    <img src="{% static 'img/med-2.jpg' %}" class="img-fluid" alt="small-car">
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a id="carousel-selector-2" data-slide-to="2" data-target="#carDetailsSlider">
+                                    <img src="{% static 'img/med-3.jpg' %}" class="img-fluid" alt="small-car">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-6 align-self-center">
+                <div class="best-used-car">
+                    <h3>Welcome to <span>Medicals</span></h3>
+                    <p>
+                        Okeke med equip is a company specialized in the sale of new and reconditioned medical equipment. We help you throughout the realization of your project according to your needs.
+                        From inception, we have been established as a leading medical supplies company in the world through outstanding reliability and customer service delivery. Our competencies have got us exclusive distribution rights to some medical brands in the world. This privilege positions us to negotiate extremely competitive prices with our suppliers enabling you to enjoy a quality product at the best possible price. All our Medical Devices are tested and controlled for your safety and comfort. We Provide you with a worldwide delivery.
+                    </p>
+                    <!-- <p class="mb-0">we have been established as a leading medical supplies company in the world through outstanding reliability and customer service delivery. Our competencies have got us exclusive distribution rights to some medical brands in the world.</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Service center end -->
+
+<!-- about -->
+<section id="somthing-else">
+    <div class="container py-4">
+        <!-- <h1 class="text-center text-white">INTRODUCTION</h1>
+        <p class="text-white">Amongst many of our available cars, here are some few picks that you might have an interest in.</p> -->
+        <div class="row gx-5">
+            
+            <div class="col-md-6 ">
+                <h2 class=" text-white">OUR SERVICES</h2>
+                <p class="text-white">
+                    We add that extra touch by not only providing quality medical products and services but also updating our clients with the most recent advances in medical technology for optimal performance. This extra touch defines our commitment to bring novel technological solutions to your doorstep. Our services to Hospitals, Tertiary Institution, Laboratories, and health professionals include:
+                    <ul class="text-white">
+                        <li>1. Medical Sales & Shipment</li>
+                        <li>2. Medical Equipment Installation</li>
+                        <li>3. Aftersales Support</li>
+                        <li>4. Medical Device Training</li>
+                    </ul>
+                </p>
+                <p class="text-white">We strive to be your favourite service provider in all scientific health care products. <br>Get a quotation for medical equipment that suits your application. <br>
+                Also we guarantee quality service and after sales support to all our clients.</p>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'img/city.jpg' %}" class="img-fluid rounded-pill shadow" style="opacity: 0.3;">
+            </div>
+
+        </div>
+        
+        
+
+    </div>
+</section>
+<!-- about end -->
+
+
+
+<!-- Our team start -->
+<div class="our-team content-area">
+    <div class="container">
+        <!-- Main title -->
+        <div class="main-title">
+            <h1>Executive <span>Team</span></h1>
+            <p>Team working behind maintaining the quality of our Car Dealership Website.</p>
+        </div>
+        <!-- Slick slider area start -->
+        <div class="slick-slider-area clearfix">
+            <div class="row slick-carousel" data-slick='{"slidesToShow": 4, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+            {% for team in teams %}
+                <div class="slick-slide-item">
+                    <div class="team-1">
+                        <div class="photo">
+                            <a href="#">
+                                <img src="{{team.photo.url}}" alt="team-1" class="img-fluid">
+                            </a>
+                            <div class="social-list clearfix">
+                                <a href="{{team.facebook_link}}" target="_blank" class="facebook-bg"><i class="fa fa-facebook"></i></a>
+                                <a href="{{team.twitter_link}}" target="_blank" class="twitter-bg"><i class="fa fa-twitter"></i></a>
+                                <a href="{{team.google_plus_link}}" target="_blank" class="google-bg"><i class="fa fa-google"></i></a>
+                            </div>
+                        </div>
+						<!-- Log on to codeastro.com for more projects -->
+                        <div class="details">
+                            <h4><a href="team-detail.html">{{team.first_name}} {{team.last_name}}</a></h4>
+                            <h5>{{team.designation}}</h5>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Our team end -->
+{% endblock %}
