@@ -11,6 +11,7 @@ from .models import Customer
 from account.forms import RegistrationForm, UserLoginForm 
 from store.models import Product
 from store.forms import AddProductForm, MediaFormSet 
+from orders.models import Order
 
 
 
@@ -74,6 +75,7 @@ class AdminDashboardView(TemplateView):
         context =  super(AdminDashboardView, self).get_context_data(**kwargs)
         context['products'] = Product.objects.all()[:8]
         context['customers'] = Customer.objects.filter(is_staff=False)[:8]
+        context['orders'] = Order.objects.all()
         return context
 
 

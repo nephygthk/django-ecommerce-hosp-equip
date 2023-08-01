@@ -1,0 +1,27 @@
+{% extends '../base.html' %}
+
+{% block title %} | Our Product Inventory {% endblock %}
+{% block content %}
+
+{% load humanize %}
+
+<style>
+    .payment-info {
+        background: #5b026d;
+    }
+</style>
+
+<!-- Sub banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Your Cart Summary</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'frontend:home' %}">Home</a></li>
+                <li class="active">Cart Summary</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+{% endblock %}

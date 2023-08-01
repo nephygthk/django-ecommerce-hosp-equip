@@ -3,8 +3,22 @@
 {% block title %} | Admin Dashboard {% endblock %}
 {% block content %}
 
+<style>
+    .condesed-table{
+        font-size: 13px !important;
+    }
+    .condesed-table .btn{
+        padding: 4px 5px;
+        font-size: 12px;
+    }
+    @media (max-width:767px){
+        .condesed-table{
+            font-size: 10px !important;
+        }
+    }
+</style>
+
 <!-- Sub banner start -->
-<!-- Log on to codeastro.com for more projects -->
 <div class="sub-banner overview-bgi">
     <div class="container breadcrumb-area">
         <div class="breadcrumb-areas">
@@ -34,7 +48,7 @@
         <div class="col-md-6">
             <h3 class="text-center">Registered Customers</h3>
             <div class="table-responsive">
-                <table class="table table-hover table-bordered table-striped">
+                <table class="table table-hover table-bordered table-striped condesed-table">
                     <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -61,7 +75,7 @@
         <div class="col-md-6">
             <h3 class="text-center">Last 8 Added Products</h3>
             <div class="table-responsive">
-                <table class="table table-hover table-bordered table-striped">
+                <table class="table table-hover table-bordered table-striped condesed-table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -85,29 +99,56 @@
             </div>
         </div>
     </div>
-    {% if inquiries %}
-        <table class="table table-hover table-bordered table-striped">
+    <hr>
+    <div class="text-center">List of Orders</div>
+    {% if orders %}
+    <div class="table-responsive">
+
+    
+        <table class="table table-hover table-bordered table-striped condesed-table">
             <thead>
             <tr>
-            <th scope="col">#</th>
-            <th scope="col">Car Name</th>
-            <th scope="col">Location</th>
-            <th scope="col">Action</th>
+                <th scope="col">Order Id</th>
+                <th scope="col">Order Date</th>
+                <th scope="col">Email</th>
+                <th scope="col">Total</th>
+                <th scope="col">Paid</th>
+                <th scope="col">Balance</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
 
-            {% for inquiry in inquiries %}
+            {% for order in orders %}
             <tr>
-                <!-- <th scope="row">{{ forloop.counter }}</th> -->
-                <th scope="row">1</th>
-                <td>{{inquiry.car_title}}</td>
-                <td>{{inquiry.city}}</td>
-                <td><a href="" class="btn btn-dark">View Car</a></td>
+                <td>{{order.order_key}}</td>
+                <td>{{order.created}}</td>
+                <td>{{order.full_name}} ({{order.email}})</td>
+                <td>${{order.total}}</td>
+                <td>${{order.paid}}</td>
+                <td>${{order.balance}}</td>
+                <td>
+                    {% if order.status == 'Pending, awaiting payment' %}
+                    <strong class="text-warning">{{order.status}}</strong>
+                    {% elif order.status == 'Delivery in Progress' %}
+                    <strong class="text-primary">{{order.status}}</strong>
+                    {% elif order.status == 'Stopped by custom' %}
+                    <strong class="text-danger">{{order.status}}</strong>
+                    {% else %}
+                    <strong class="text-success">{{order.status}}</strong>
+                    {% endif %}
+                </td>
+                <td><a href="" class="btn btn-info">Update</a></td>
+                <td><a href="" class="btn btn-danger">Delete</a></td>
+                <td><a href="" class="btn btn-primary">Receipt</a></td>
             </tr>
             {% endfor %}
             </tbody>
-        </table><!-- Log on to codeastro.com for more projects -->
+        </table>
+    </div>
     {% else %}
     <div class="alert alert-primary" role="alert">
         <h4>You have no Orders!!</h4>

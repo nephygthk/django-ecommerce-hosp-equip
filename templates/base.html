@@ -8,6 +8,7 @@
     <meta charset="utf-8">
 
     <!-- External CSS libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 	<!-- Log on to codeastro.com for more projects -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/animate.min.css' %} ">
@@ -65,11 +66,33 @@
             background-size: cover; 
             background-attachment: fixed;
         }
-        /* @media (max-width: 992px){
-            .featured-car{
-            background-attachment: local;
+        .basket-btn{
+            position: relative;
         }
-        } */
+        #basket-qty{
+            color: #fff;
+            background: #d42114;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 11px;
+            height: 15px;
+            width: 14px;
+            position: absolute;
+            box-sizing: content-box;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 23px;
+            right: 18px;
+        }
+        @media (max-width:767px){
+            #basket-qty{
+                bottom: 23px;
+                left: 38px;
+            }
+        }
     </style>
 
 

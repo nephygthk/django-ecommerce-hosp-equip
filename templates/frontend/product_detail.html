@@ -146,12 +146,37 @@
 
                 <div class="sidebar-right">
                     <!-- Advanced search start -->
+                    <div class="text-primary" id="bt-alert"></div>
                     <div class="widget advanced-search ">
-                        <button class="btn btn-danger bomd btn-block btn-lg">Add To Cart</button>
+                        <button value="{{product.id}}" class="btn btn-danger bomd btn-block btn-lg" id="add-button">Add To Cart</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- getting the product to add to cart -->
+
+<script>
+    $(document).on('click', '#add-button', function (e) {
+      e.preventDefault();
+      console.log($('#add-button').val())
+      $.ajax({
+        type: 'POST',
+        url: '{% url "basket:basket_add" %}',
+        data: {
+          productid: $('#add-button').val(),
+          qty: 1,
+          csrfmiddlewaretoken: "{{csrf_token}}",
+          action: 'post'
+        },
+        success: function (json) {
+          document.getElementById("basket-qty").innerHTML = json.qty
+          document.getElementById("bt-alert").innerHTML = "Item is successfuly added to cart"
+        },
+        error: function (xhr, errmsg, err) {}
+      });
+    })
+</script>
 {% endblock %}

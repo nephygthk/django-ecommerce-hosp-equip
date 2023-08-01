@@ -80,5 +80,14 @@ class ClientForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        self.fields['c_full_name'].widget.attrs.update(
+            {'placeholder': 'Full Name'})
+        self.fields['c_email'].widget.attrs.update(
+            {'placeholder': 'Email'})
+        self.fields['c_country'].widget.attrs.update(
+            {'placeholder': 'Country'})
+        self.fields['c_city'].widget.attrs.update(
+            {'placeholder': 'City'})
+
         for field in self.fields:
             self.fields[field].widget.attrs.update({'class': 'form-control mb-3'})

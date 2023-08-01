@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Machinary</title>
+</head>
+<body>
+    <p>Dear {{name}},</p>
+    <P>Thank you for choosing Blue Revelle Inc. Here is Summary of the orders you placed on {{date}}.</P> 
+    <p>A payment details will be forwarded to you soon, Please send the payment receipt to this email after your payment for verification purpose</p>
+
+    <h5>Order Details</h5>
+    <!-- <p>Order ID: {{orde_id}}</p> -->
+    <p>Order Date: {{date}}</p>
+    <p>Customer Name: {{name}}</p>
+    <p>Country: {{country}}</p>
+    <p>City:  {{city}}</p>
+    <p>Total Price: {{total}}</p>
+    <p>Please click the link below to view your receipt></p>
+    <a href="https://www.bluerevelleinc.com/order/view_receipt/{{orde_id}}/">My Receipt</a> <br>
+    <p>Regards, <br>Blue Revelle Inc, <br>https://www.bluerevelleinc.com</p>
+    
+</html>
