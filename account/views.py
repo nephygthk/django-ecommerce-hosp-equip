@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, FormView
@@ -63,7 +64,7 @@ class LoginUserView(LoginView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class AdminDashboardView(TemplateView):
+class AdminDashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'account/admin_dashboard.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -79,7 +80,7 @@ class AdminDashboardView(TemplateView):
         return context
 
 
-class CustomerDashboardView(TemplateView):
+class CustomerDashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'account/customer_dashboard.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -122,6 +123,7 @@ class AddProductView(LoginRequiredMixin, CreateView):
       return ctx
 
 
+@login_required(login_url='account:login')
 def delete_product(request, pk):
     if not request.user.is_staff:
         return HttpResponse("Error handler content", status=400)
@@ -131,6 +133,7 @@ def delete_product(request, pk):
     return redirect('account:admin_dashboard')
 
 
+@login_required(login_url='account:login')
 def delete_customer(request, pk):
     if not request.user.is_staff:
         return HttpResponse("Error handler content", status=400)
