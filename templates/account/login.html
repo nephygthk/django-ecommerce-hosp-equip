@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %} | Login {% endblock %}
+{% block content %}
+{% load static %}
+
+<style>
+    .contact-section{
+        background-image:linear-gradient(rgba(10, 9, 10, 0.6),rgba(85, 9, 129, 0.2)), url(/static/img/login.jpg);
+            /* height: 500px; */
+            background-position: center; 
+            background-repeat: no-repeat; 
+            background-size: cover; 
+            background-attachment: fixed;
+    }
+</style>
+
+
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Login To Your Account</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'frontend:home' %}">Home</a></li>
+                <li class="active">Login</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- Contact section start -->
+<div class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-section">
+                    <div class="logo-2 mb-4">
+                        <a href="{% url 'frontend:home' %}">
+                            <img src="{% static 'img/logos/cardealerLogo.png' %}" alt="logo">
+                        </a>
+                    </div>
+                    {% if form.errors %}
+                        <p class="text-white fw-bold">Please correct the following errors:</p>
+                        {% for field in form %}
+                            {% if field.errors %}
+                            <div class="alert alert-primary" role="alert">
+                                {{ field.label }}: {{ field.errors|striptags }}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <h3>Customer Login Panel</h3>
+                    {% include 'includes/messages.html' %}
+                    <form action="{% url 'account:login' %}" method="POST">
+                      {% csrf_token %}
+                        <div class="form-group form-box">
+                            {{form.username}}
+                            <i class="flaticon-mail"></i>
+                        </div>
+                        <div class="form-group form-box">
+                            {{form.password}}
+                            <i class="flaticon-lock"></i>
+                        </div>
+                        
+                        <div class="form-group mb-0 clearfix">
+                            <button type="submit" class="btn-md btn-success float-left">Login</button>
+                        </div>
+                        <div class="extra-login clearfix">
+                            <span><p>Don't have an account? <a href="{% url 'account:register' %}" class="thembo text-info"> Register here</a></p></span>
+                        </div>
+                        <div class="clearfix"></div>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact section end -->
+
+{% endblock %}

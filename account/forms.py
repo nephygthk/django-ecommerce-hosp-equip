@@ -8,9 +8,13 @@ class UserLoginForm(AuthenticationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update(
+            {'placeholder': 'Email'})
+        self.fields['password'].widget.attrs.update(
+            {'placeholder': 'Password'})
 
         for field in self.fields:
-            self.fields[field].widget.attrs.update({'class': 'form-control mb-3'})
+            self.fields[field].widget.attrs.update({'class': 'form-control mb-3 input-text'})
 
 class RegistrationForm(forms.ModelForm):
     email = forms.EmailField(max_length=100, help_text='Required', error_messages={
@@ -44,15 +48,18 @@ class RegistrationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['email'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'name': 'email', 'id': 'id_email'})
+            {'class': 'form-control mb-3', 'name': 'email', 'id': 'id_email', 'placeholder': 'Email'})
         self.fields['full_name'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'name': 'name', 'id': 'id_name'})
+            {'class': 'form-control mb-3', 'name': 'name', 'id': 'id_name', 'placeholder': 'Full Name'})
         self.fields['country'].widget.attrs.update(
-            {'class': 'form-control mb-3',  'name': 'country', 'id': 'id_country'})
+            {'class': 'form-control mb-3',  'name': 'country', 'id': 'id_country', 'placeholder': 'Country'})
         self.fields['password'].widget.attrs.update(
-            {'class': 'form-control mb-3'})
+            {'class': 'form-control mb-3', 'placeholder': 'Password'})
         self.fields['password2'].widget.attrs.update(
-            {'class': 'form-control mb-3'})
+            {'class': 'form-control mb-3', 'placeholder': 'Repeat Password'})
+        
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'input-text'})
 
 
 class CustomerChangePasswordForm(PasswordChangeForm):

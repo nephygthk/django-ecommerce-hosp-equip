@@ -47,7 +47,9 @@
         </div>
         <!-- Search box 3 start -->
         <div class="search-box-4 sb-8">
-            <form action="" method="">
+            {% include 'includes/messages.html' %}
+            <form action="{% url 'account:user_index_login' %}" method="POST">
+                {% csrf_token %}
                 <div class="form-group">
                     <div class="mb-3">
                         <label for="email" class="form-label fw-bold">Email Address</label>
@@ -60,7 +62,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <button class="btn btn-block button-theme btn-md">
+                    <button type="submit" class="btn btn-block button-theme btn-md">
                         <i class="fa fa-filter"></i> Login
                     </button>
                 </div>
@@ -77,7 +79,6 @@
                 <i class="fa fa-angle-right"></i>
             </span>
         </a>
-		<!-- Log on to codeastro.com for more projects -->
     </div>
 </div>
 <!-- Banner end -->
@@ -87,8 +88,6 @@
 <!-- about -->
 <section id="about-neph">
     <div class="container-fluid py-4">
-        <!-- <h1 class="text-center text-white">INTRODUCTION</h1>
-        <p class="text-white">Amongst many of our available cars, here are some few picks that you might have an interest in.</p> -->
         <div class="row gx-5">
             <div class="col-md-6 lolo">
                 <img src="{% static 'img/ab-1.jpg' %}" class="img-fluid rounded-pill shadow " style="opacity: 0.3;">
@@ -116,8 +115,8 @@
     <div class="container">
         <!-- Main title -->
         <div class="main-title">
-            <h1 class="text-white">Featured <span>Products</span></h1>
-            <p class="text-white">Amongst many of our available cars, here are some few picks that you might have an interest in.</p>
+            <h1 class="text-white d-none-992">Featured <span>Products</span></h1>
+            <!-- <p class="text-white">Amongst many of our available cars, here are some few picks that you might have an interest in.</p> -->
         </div>
         <!-- Slick slider area start -->
         <div class="slick-slider-area clearfix">
@@ -126,7 +125,7 @@
                 <div class="slick-slide-item">
                     <div class="car-box-3">
                         <div class="car-thumbnail">
-                            <a href="" class="car-img">
+                            <a href="{% url 'frontend:product_detail' product.slug %}" class="car-img">
                                 <div class="tag-2">Featured</div>
                                 <div class="price-box">
                                     <span>${{product.price}}</span>
@@ -149,36 +148,20 @@
                                                 </a>
                                                 {% endif %}
                                             {% endfor %}
-
-                                            {% if car.car_photo_1 %}
-                                            <a href="{{car.car_photo_1.url}}" class="hidden">
-                                                <img class="hidden" src="{{car.car_photo_1.url}}">
-                                            </a>
-                                            {% endif %}
-                                            {% if car.car_photo_2 %}
-                                            <a href="{{car.car_photo_2.url}}" class="hidden">
-                                                <img class="hidden" src="{{car.car_photo_2.url}}">
-                                            </a>
-                                            {% endif %}
-                                            {% if car.car_photo_3 %}
-                                            <a href="{{car.car_photo_3.url}}" class="hidden">
-                                                <img class="hidden" src="{{car.car_photo_3.url}}">
-                                            </a>
-                                            {% endif %}
-                                            {% if car.car_photo_4 %}
-                                            <a href="{{car.car_photo_4.url}}" class="hidden">
-                                                <img class="hidden" src="{{car.car_photo_4.url}}">
-                                            </a>
-                                            {% endif %}
+                                            
+                                            {% for imgg in product.media.all %}
+                                                <a href="{{imgg.image.url}}" class="hidden">
+                                                    <img class="hidden" src="{{imgg.image.url.url}}">
+                                                </a>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-						<!-- Log on to codeastro.com for more projects -->
                         <div class="detail">
                             <h1 class="title">
-                                <a href="">{{ product.title}}</a>
+                                <a href="{% url 'frontend:product_detail' product.slug %}">{{ product.title}}</a>
                             </h1>
                         </div>
                     </div>
@@ -245,7 +228,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="car-box">
                     <div class="car-thumbnail">
-                        <a href="" class="car-img">
+                        <a href="{% url 'frontend:product_detail' product.slug %}" class="car-img">
                             <div class="tag">For Sale</div>
                             <div class="price-box">
                                 <span>${{product.price}}</span>
@@ -270,26 +253,11 @@
                                             {% endif %}
                                         {% endfor %}
 
-                                        {% if car.car_photo_1 %}
-                                        <a href="{{car.car_photo_1.url}}" class="hidden">
-                                            <img class="hidden" src="{{car.car_photo_1.url}}">
-                                        </a>
-                                        {% endif %}
-                                        {% if car.car_photo_2 %}
-                                        <a href="{{car.car_photo_2.url}}" class="hidden">
-                                            <img class="hidden" src="{{car.car_photo_2.url}}">
-                                        </a>
-                                        {% endif %}
-                                        {% if car.car_photo_3 %}
-                                        <a href="{{car.car_photo_3.url}}" class="hidden">
-                                            <img class="hidden" src="{{car.car_photo_3.url}}">
-                                        </a>
-                                        {% endif %}
-                                        {% if car.car_photo_4 %}
-                                        <a href="{{car.car_photo_4.url}}" class="hidden">
-                                            <img class="hidden" src="{{car.car_photo_4.url}}">
-                                        </a>
-                                        {% endif %}
+                                        {% for imgg in product.media.all %}
+                                            <a href="{{imgg.image.url}}" class="hidden">
+                                                <img class="hidden" src="{{imgg.image.url.url}}">
+                                            </a>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -298,7 +266,7 @@
                     </div>
                     <div class="detail">
                         <h1 class="title">
-                            <a href="">{{product.title}}</a>
+                            <a href="{% url 'frontend:product_detail' product.slug %}">{{product.title}}</a>
                         </h1>
                     </div>
                 </div>

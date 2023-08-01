@@ -1,0 +1,157 @@
+{% extends '../base.html' %}
+
+{% block title %} | {{product.title}} {% endblock %}
+{% block content %}
+
+{% load static %}
+{% load humanize %}
+
+<style>
+    .big-img{
+        height: 450px;
+        /* width: 500px; */
+        object-fit: cover;
+    }
+    .small-img{
+        height: 100px;
+        object-fit: cover;
+    }
+    @media (max-width: 767px){
+        .big-img{
+            height: 300px;
+            
+        }
+        .small-img{
+            height: 60px;
+            
+        }
+    }
+</style>
+<!-- Sub banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>{{product.title}}</h1>
+            <ul class="breadcrumbs">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">{{product.title}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<!-- Car details page start -->
+<div class="car-details-page content-area-6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-12 col-xs-12">
+                <div class="car-details-section">
+                    <!-- Heading start -->
+                    <div class="heading-car clearfix">
+                      {% include 'includes/messages.html' %}
+                        <div class="pull-left">
+                            <h3>{{product.title}}</h3>
+                        </div>
+                        <div class="pull-right">
+                            <h3><span>$ {{product.price | intcomma}}</span></h3>
+                        </div>
+                    </div>
+                    <div id="carDetailsSlider" class="carousel car-details-sliders slide mb-40">
+                        <!-- main slider carousel items -->
+                        <div class="carousel-inner">
+                            {% for imgg in product.media.all %}
+                                {% if imgg.is_top %}
+                            <div class="active item carousel-item" data-slide-number="0">
+                                <img src="{{imgg.image.url}}" class="img-fluid big-img" alt="slider-car">
+                            </div>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% for imgg in product.media.all %}
+                                <div class="item carousel-item" data-slide-number="{{forloop.counter}}">
+                                    <img src="{{imgg.image.url}}" class="img-fluid big-img" alt="slider-car">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <!-- main slider carousel nav controls -->
+                        <div class="carousel-indicators-section clearfix">
+                            <ul class="carousel-indicators car-properties list-inline nav nav-justified">
+                                {% for imgg in product.media.all %}
+                                {% if imgg.is_top %}
+                                <li class="list-inline-item active">
+                                    <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#carDetailsSlider">
+                                        <img src="{{imgg.image.url}}" class="img-fluid small-img" alt="small-car">
+                                    </a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+
+
+                                {% for imgg in product.media.all %}
+                                <li class="list-inline-item">
+                                    <a id="carousel-selector-1" data-slide-to="{{forloop.counter}}" data-target="#carDetailsSlider">
+                                        <img src="{{imgg.image.url}}" class="img-fluid small-img" alt="small-car">
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-12">
+
+                <!-- Tabbing box start -->
+                <div class="tabbing tabbing-box mb-40">
+                    <ul class="nav nav-tabs" id="carTab" role="tablist">
+                        <!-- <li class="nav-item">
+                            <a class="nav-link active show" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="one" aria-selected="false">Product overview</a>
+                        </li> -->
+                        <li class="nav-item active show">
+                            <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="two" aria-selected="false">Description</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="carTabContent">
+                        <!-- <div class="tab-pane fade" id="one" role="tabpanel" aria-labelledby="one-tab">
+                            <div class="features-info mb-50">
+                                <h3 class="heading-2">Features</h3>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <ul>
+                                            <li>
+                                                <strong>Condition: </strong>Brand New
+                                            </li>
+                                            <li><strong>Price: </strong> {{product.price}}</li>
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="tab-pane fade active show" id="two" role="tabpanel" aria-labelledby="two-tab">
+                            <div class="car-description mb-50">
+                                <!-- <h3 class="heading-2">
+                                    Description
+                                </h3> -->
+                                <p>
+                                  {{product.description | safe }}
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="sidebar-right">
+                    <!-- Advanced search start -->
+                    <div class="widget advanced-search ">
+                        <button class="btn btn-danger bomd btn-block btn-lg">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

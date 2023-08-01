@@ -3,6 +3,23 @@
 {% block title %} | Contact Us {% endblock %}
 {% block content %}
 
+<style>
+    .contact-2{
+        background-image:linear-gradient(rgba(10, 9, 10, 0.6),rgba(85, 9, 129, 0.2)), url(/static/img/contact.jpg);
+            /* height: 500px; */
+            background-position: center; 
+            background-repeat: no-repeat; 
+            background-size: cover; 
+            background-attachment: fixed;
+    }
+    .text-left input, .text-left textarea{
+        color: #fff !important;
+    }
+    /* textarea:focus, input:focus {
+        color: #fff;
+    } */
+</style>
+
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
     <div class="container breadcrumb-area">
@@ -22,7 +39,7 @@
     <div class="container">
         <!-- Main title -->
         <div class="main-title text-center">
-            <h1>Contact <span>Us</span></h1>
+            <h1 class="text-white">Contact <span>Us</span></h1>
             <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p> -->
         </div>
         <form action="{% url 'frontend:contact' %}" method="POST" enctype="multipart/form-data">
@@ -36,23 +53,23 @@
                                 <input type="text" name="name" class="form-control" placeholder="Full Name" required>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 text-left">
                             <div class="form-group email">
                                 <input type="email" name="email" class="form-control" placeholder="Email" required>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 text-left">
                             <div class="form-group subject">
                                 <input type="text" name="subject" class="form-control" placeholder="Subject" required>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 text-left">
                             <div class="form-group number">
                                 <input type="text" name="phone" class="form-control" placeholder="Number">
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group message">
+                        <div class="col-md-12 text-left">
+                            <div class="form-group message text-left">
                                 <textarea class="form-control" name="message" placeholder="Write message"></textarea>
                             </div>
                         </div>

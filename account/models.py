@@ -6,6 +6,12 @@ from django.utils.translation import gettext_lazy as _
 from django.db import models
 from .managers import CustomAccountManager
 
+import string
+import random
+
+def rand_slug():
+    return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
+
 
 class Customer(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email address"), unique=True)

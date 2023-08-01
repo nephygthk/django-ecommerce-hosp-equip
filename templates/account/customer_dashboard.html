@@ -1,0 +1,82 @@
+{% extends '../base.html' %}
+
+{% block title %} | Customer Dashboard {% endblock %}
+{% block content %}
+
+<!-- Sub banner start -->
+<!-- Log on to codeastro.com for more projects -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <!-- <h1>Admin Dashboard</h1> -->
+            <ul class="breadcrumbs">
+                <li><a href="">Customer Dashboard</a></li>
+                <li class="active">{{request.user.full_name}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<!--   Dashboard Start   -->
+
+<div class="container mt-50 mb-50">
+  {% include 'includes/messages.html' %}
+	<div class="main-title" style="text-align:left !important;">
+        <h1>Welcome <span>{{request.user.full_name}},</span></h1>
+        <p>Here you can view your most recent orders:</p>
+        <hr>
+        <a href="" class="btn btn-primary fw-bold btn-block w-50">Settings</a>
+        <hr>
+    </div>
+    {% if inquiries %}
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+            <tr>
+            <th scope="col">Order Id</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Email</th>
+            <th scope="col">Total</th>
+            <th scope="col">Paid</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+
+                {% for order in orders %}
+                <tr>
+                    <td>{{order.order_key}}</td>
+                    <td>{{order.created}}</td>
+                    <td>{{order.email}}</td>
+                    <td>{{order.total}}</td>
+                    <td>{{order.paid}}</td>
+                    <td>{{order.balance}}</td>
+                    <td>
+                        {% if order.status == 'Pending, awaiting payment' %}
+                        <strong class="text-warning">{{order.status}}</strong>
+                        {% elif order.status == 'Delivery in Progress' %}
+                        <strong class="text-primary">{{order.status}}</strong>
+                        {% elif order.status == 'Stopped by custom' %}
+                        <strong class="text-danger">{{order.status}}</strong>
+                        {% else %}
+                        <strong class="text-success">{{order.status}}</strong>
+                        {% endif %}
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table><!-- Log on to codeastro.com for more projects -->
+    {% else %}
+    <div class="alert alert-primary" role="alert">
+        <h4>You have no Orders!!</h4>
+    </div>
+        
+    {% endif %}
+
+</div>
+
+<!--   Dashboard End   -->
+
+{% endblock %}
