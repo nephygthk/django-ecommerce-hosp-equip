@@ -61,7 +61,7 @@ def checkout_order(request):
             f_message = render_to_string('emails/email_order.html', 
                             {
                                 'name': customer.c_full_name,
-                                'order_id': order.pk,
+                                'order_id': order.slug,
                                 'date': order.created,
                                 'country': customer.c_country,
                                 'city': customer.c_city,

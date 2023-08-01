@@ -55,7 +55,7 @@
                     <td>
                         {% if order.status == 'Pending, awaiting payment' %}
                         <strong class="text-warning">{{order.status}}</strong>
-                        {% elif order.status == 'Delivery in Progress' %}
+                        {% elif order.status == 'Shipping in Progress' %}
                         <strong class="text-primary">{{order.status}}</strong>
                         {% elif order.status == 'Stopped by custom' %}
                         <strong class="text-danger">{{order.status}}</strong>

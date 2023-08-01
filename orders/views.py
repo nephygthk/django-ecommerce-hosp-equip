@@ -1,3 +1,41 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.views.generic import UpdateView
+from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 
-# Create your views here.
+from . models import Order, OrderItem
+from . import forms
+
+
+class EditOrderView(LoginRequiredMixin, UpdateView):
+    model = Order
+    form_class = forms.EditOrderForm
+    template_name = 'orders/edit_order.html'
+
+    def get_success_url(self):
+        return reverse_lazy('account:admin_dashboard')
+    
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, 'Order Updated successfully')
+        return HttpResponseRedirect(self.get_success_url())
+    
+
+@login_required(login_url='account:login')
+def delete_order(request, slug):
+    order = Order.objects.get(slug=slug)
+    order.delete()
+    messages.success(request, 'Order was deleted successfully')
+    return redirect('account:admin_dashboard')
+
+
+def view_receipt(request, slug):
+    order = Order.objects.get(slug=slug)
+    order_items = OrderItem.objects.filter(order=order)
+
+    context = {'order':order, 'order_items':order_items}
+    return render(request, 'orders/view_receipt.html', context)
+        

@@ -110,7 +110,7 @@
             <tr>
                 <th scope="col">Order Id</th>
                 <th scope="col">Order Date</th>
-                <th scope="col">Email</th>
+                <th scope="col">Customer</th>
                 <th scope="col">Total</th>
                 <th scope="col">Paid</th>
                 <th scope="col">Balance</th>
@@ -133,7 +133,7 @@
                 <td>
                     {% if order.status == 'Pending, awaiting payment' %}
                     <strong class="text-warning">{{order.status}}</strong>
-                    {% elif order.status == 'Delivery in Progress' %}
+                    {% elif order.status == 'Shipping in Progress' %}
                     <strong class="text-primary">{{order.status}}</strong>
                     {% elif order.status == 'Stopped by custom' %}
                     <strong class="text-danger">{{order.status}}</strong>
@@ -141,9 +141,9 @@
                     <strong class="text-success">{{order.status}}</strong>
                     {% endif %}
                 </td>
-                <td><a href="" class="btn btn-info">Update</a></td>
-                <td><a href="" class="btn btn-danger">Delete</a></td>
-                <td><a href="" class="btn btn-primary">Receipt</a></td>
+                <td><a href="{% url 'orders:edit_order' order.slug %}" class="btn btn-info">Update</a></td>
+                <td><a href="{% url 'orders:delete_order' order.slug %}" class="btn btn-danger">Delete</a></td>
+                <td><a href="{% url 'orders:view_receipt' order.slug %}" class="btn btn-primary">Receipt</a></td>
             </tr>
             {% endfor %}
             </tbody>

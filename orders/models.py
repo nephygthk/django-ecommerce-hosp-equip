@@ -5,6 +5,7 @@ import string
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
+from django.utils.text import slugify
 
 from store.models import Product
 
@@ -31,6 +32,7 @@ class Order(models.Model):
     sub_total = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank=True)
     order_key = models.CharField(max_length=200, null=True, blank=True)
     status = models.CharField(max_length=150, choices=STATUS, default='Pending, awaiting payment')
+    slug = models.SlugField(null=True, blank=True)
 
     class Meta:
         ordering = ('-created',)
@@ -44,9 +46,12 @@ class Order(models.Model):
 
 def order_key_post_save(sender, instance, created,*args, **kwargs):
     if created:
+        slug_mid = f'{rand_slug()} {instance.full_name} {instance.country} {instance.city}'
+        instance.slug = slugify(slug_mid)
         ref_final = f'{rand_slug()}{instance.id}'
         instance.order_key = f'BR-{ref_final}-INC'
         instance.save()
+
 
 post_save.connect(order_key_post_save, sender=Order)
 
