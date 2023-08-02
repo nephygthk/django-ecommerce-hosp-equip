@@ -2,6 +2,7 @@
 
 {% block title %} | Admin Dashboard {% endblock %}
 {% block content %}
+{% load humanize %}
 
 <style>
     .condesed-table{
@@ -127,9 +128,9 @@
                 <td>{{order.order_key}}</td>
                 <td>{{order.created}}</td>
                 <td>{{order.full_name}} ({{order.email}})</td>
-                <td>${{order.total}}</td>
-                <td>${{order.paid}}</td>
-                <td>${{order.balance}}</td>
+                <td>${{order.total|intcomma}}</td>
+                <td>${{order.paid|intcomma}}</td>
+                <td>${{order.get_final_balance|intcomma}}</td>
                 <td>
                     {% if order.status == 'Pending, awaiting payment' %}
                     <strong class="text-warning">{{order.status}}</strong>

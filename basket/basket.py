@@ -49,8 +49,16 @@ class Basket:
             shipping = Decimal(0.00)
         elif subtotal <= 55000:
             shipping = Decimal(11000.00)
+        elif subtotal <= 120000:
+            shipping = Decimal(22000.00)
+        elif subtotal <= 270000:
+            shipping = Decimal(29000.00)
+        elif subtotal <= 330000:
+            shipping = Decimal(33000.00)
+        elif subtotal <= 470000:
+            shipping = Decimal(37000.00)
         else:
-            shipping = Decimal(37500.50)
+            shipping = Decimal(47500.50)
 
         total = subtotal + Decimal(shipping)
         return total
@@ -61,8 +69,16 @@ class Basket:
             shipping = Decimal(0.00)
         elif subtotal <= 55000:
             shipping = Decimal(11000.00)
+        elif subtotal <= 120000:
+            shipping = Decimal(22000.00)
+        elif subtotal <= 270000:
+            shipping = Decimal(29000.00)
+        elif subtotal <= 330000:
+            shipping = Decimal(33000.00)
+        elif subtotal <= 470000:
+            shipping = Decimal(37000.00)
         else:
-            shipping = Decimal(37500.50)
+            shipping = Decimal(47500.50)
         return shipping
     
     def delete(self, product):

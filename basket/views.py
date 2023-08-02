@@ -2,6 +2,10 @@ from django.http import JsonResponse
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template.loader import render_to_string
+from django.urls import reverse
+from django.utils.http import urlencode
+
+
 
 from .basket import Basket
 from store.models import Product
@@ -48,16 +52,16 @@ def checkout_order(request):
         customer = form.save()
         baskettotal = basket.get_total_price()
         basketsubtotal = basket.get_subtotal_price()
+        basketshipping = basket.get_shipping_price()
         
         if request.user.is_authenticated:
             user_id = request.user.id
             order = Order.objects.create(user_id=user_id, full_name=customer.c_full_name, 
-                    email=customer.   c_email, country=customer.c_country, city=customer.c_city, total=baskettotal, sub_total=basketsubtotal)
+                    email=customer.   c_email, country=customer.c_country, city=customer.c_city, total=baskettotal, sub_total=basketsubtotal, shipping_price=basketshipping)
             order_id = order.pk
             for item in basket:
                 OrderItem.objects.create(order_id=order_id, product=item['product'], price=item['price'], 
                                          quantity=item['qty'])
-                
             f_message = render_to_string('emails/email_order.html', 
                             {
                                 'name': customer.c_full_name,
@@ -76,10 +80,14 @@ def checkout_order(request):
             except:
                 pass 
             finally:
-                return redirect('basket:order_successful')   
+                basket.clear()
+                redirect_url = reverse('basket:order_successful')
+                parameters = urlencode({'obj': order.slug})
+                return redirect(f'{redirect_url}?{parameters}')
+                # return redirect(, {'obj': order.pk})   
         else:
             order = Order.objects.create(full_name=customer.c_full_name, 
-                    email=customer.   c_email, country=customer.c_country, total=baskettotal, sub_total=basketsubtotal)
+                    email=customer.   c_email, country=customer.c_country, total=baskettotal, sub_total=basketsubtotal, shipping_price=basketshipping)
             order_id = order.pk
             for item in basket:
                 OrderItem.objects.create(order_id=order_id, product=item['product'], price=item['price'], quantity=item['qty'])
@@ -102,14 +110,38 @@ def checkout_order(request):
             except:
                 pass 
             finally:
-                return redirect('basket:order_successful')
+                basket.clear()
+                redirect_url = reverse('basket:order_successful')
+                parameters = urlencode({'obj': order.pk})
+                return redirect(f'{redirect_url}?{parameters}')
     else:
         messages.error(request, 'Something went wrong, please check the form informations and try again')
         return redirect('basket:basket_summary')
 
 
 def order_successful(request):
-    basket = Basket(request)
-    context = {'basket': basket}
-    basket.clear()
+    order_slug = request.GET.get('obj')
+    order = Order.objects.get(slug=order_slug)
+    order_items = OrderItem.objects.filter(order=order)
+    
+    if not request.POST:
+        f_message = render_to_string('emails/email_admin_order.html', 
+            {
+                'name': order.full_name,
+                'email': order.email,
+                'date': order.created,
+                'items': order_items,
+                'country': order.country,
+                'total': order.get_final_balance()
+            })
+        try:
+            emails.email_message_send(
+                        'New Order Placed',
+                        f_message,
+                        'headoffice@bluerevelleinc.com',
+                    )
+        except:
+            pass 
+
+    context = {'order_items':order_items, 'order':order}
     return render(request, 'basket/order_successful.html', context)

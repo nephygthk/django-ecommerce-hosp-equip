@@ -11,27 +11,22 @@
     }
     .order-bg{
         background-image:linear-gradient(rgba(10, 9, 10, 0.6),rgba(85, 9, 129, 0.2)), url(/static/img/order.jpg);
-        height: 100vh;
+        height: 100%;
         background-position: center; 
         background-repeat: no-repeat; 
         background-size: cover; 
-        background-attachment: fixed;
+        /* background-attachment: fixed; */
+    }
+    .condesed-table{
+        font-size: 13px !important;
+    }
+    @media (max-width:767px){
+        .condesed-table{
+            font-size: 10px !important;
+        }
     }
 </style>
 
-<!-- Sub banner start -->
-<!-- <div class="sub-banner overview-bgi">
-    <div class="container breadcrumb-area">
-        <div class="breadcrumb-areas">
-            <h1>Your Cart Summary</h1>
-            <ul class="breadcrumbs">
-                <li><a href="{% url 'frontend:home' %}">Home</a></li>
-                <li class="active">Cart Summary</li>
-            </ul>
-        </div>
-    </div>
-</div> -->
-<!-- Sub Banner end -->
 <section class="order-bg py-5">
     <div class="container py-5 ">
         <div class="row justify-content-center align-items-center py-5">
@@ -39,14 +34,37 @@
                 <div class="card bg-light shadow-lg">
                     <div class="card-body">
                         <center>
-                            <i class="fa fa-check" aria-hidden="true" style="font-size: 140px; color: #fff;"></i>
+                            <i class="fa fa-check bg-success" aria-hidden="true" style="font-size: 50px; color: #fff;"></i>
     
                             <i class="bi bi-check-circle" ></i>
                         </center>
-                        <p class="fw-bold text-center text-white">Your Order was placed Successfully. <br>
+                        <p class="fw-bold text-center text-white small">Your Order was placed Successfully.
                             Please check your email for further instructions on how to make payment.
                             Thank you.
                         </p>
+                        <hr class="my-1">
+                        <h6 class="text-white">Order Details</h6>
+                        <hr class="my-1">
+                        <div class="order-head">
+                            <p class="text-white small mb-0"><strong class="text-white">ID: </strong> #{{order.order_key}}</p>
+                            <p class="text-white small mb-0"><strong class="text-white">Date: </strong> {{order.created}}</p>
+                            <p class="text-white small mb-0"><strong class="text-white">Total: </strong> ${{order.get_final_balance|intcomma}}</p>
+                        </div>
+                        
+                        <div class="table-responsive ">
+                            <table class="table table-hover text-white table-bordered table-striped condesed-table table-sm">
+                                
+                                <tbody>
+                                {% for item in order_items %}
+                                <tr>
+                                    <th scope="row">{{forloop.counter}}</th>
+                                    <td>{{item.product.title}}</td>
+                                    <td>${{item.product.price|intcomma}}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                         
     
                     </div>

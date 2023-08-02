@@ -98,15 +98,7 @@
                                             </tr>
                                             <tr class="other-money">
                                                 <td>Shipping:</td>
-                                                {% if order.sub_total <= 0 %}
-                                                    <td>$0.00</td>
-                                                {% elif order.sub_total <= 45000 %}
-                                                    <td>$37,500.50</td>
-                                                {% elif order.sub_total > 45000 %}
-                                                    <td>$37,500.50</td>
-                                                {% else %}
-                                                    <td>$0.00</td>
-                                                {% endif %}
+                                                <td>${{order.shipping_price|intcomma}}</td>
                                             </tr>
                                             <tr class="other-money">
                                                 <td>Tax:</td>
