@@ -287,8 +287,7 @@ $(function () {
         $(this).children(".current-max").val(currentMax);
     });
 
-    // Select picket
-    $('.selectpicker').selectpicker();
+    
 
     // Search option's icon toggle
     $('.search-options-btn').on('click', function () {
