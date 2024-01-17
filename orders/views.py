@@ -32,8 +32,8 @@ def delete_order(request, slug):
     return redirect('account:admin_dashboard')
 
 
-def view_receipt(request, slug):
-    order = Order.objects.get(slug=slug)
+def view_receipt(request, pk):
+    order = Order.objects.get(pk=pk)
     order_items = OrderItem.objects.filter(order=order)
 
     context = {'order':order, 'order_items':order_items}

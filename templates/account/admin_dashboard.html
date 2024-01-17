@@ -46,7 +46,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <h3 class="text-center">Registered Customers</h3>
             <div class="table-responsive">
                 <table class="table table-hover table-bordered table-striped condesed-table">
@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <h3 class="text-center">Last 8 Added Products</h3>
             <div class="table-responsive">
                 <table class="table table-hover table-bordered table-striped condesed-table">
@@ -82,6 +82,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Product Name</th>
                             <th scope="col">Date Added</th>
+                            <th scope="col">Action</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -92,7 +93,9 @@
                             <th scope="row">{{forloop.counter}}</th>
                             <td>{{product.title}}</td>
                             <td>{{product.created}}</td>
+                            <td><a href="{% url 'account:edit_product' product.id %}" class="btn btn-primary btn-sm">Edit</a></td>
                             <td><a href="{% url 'account:delete_product' product.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -144,7 +147,7 @@
                 </td>
                 <td><a href="{% url 'orders:edit_order' order.slug %}" class="btn btn-info">Update</a></td>
                 <td><a href="{% url 'orders:delete_order' order.slug %}" class="btn btn-danger">Delete</a></td>
-                <td><a href="{% url 'orders:view_receipt' order.slug %}" class="btn btn-primary">Receipt</a></td>
+                <td><a href="{% url 'orders:view_receipt' order.pk %}" class="btn btn-primary">Receipt</a></td>
             </tr>
             {% endfor %}
             </tbody>

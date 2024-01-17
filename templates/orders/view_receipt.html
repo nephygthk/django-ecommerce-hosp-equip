@@ -60,8 +60,8 @@
                                     </thead>
                                     <tbody class="table-bodyy">
                                     {% for item in order_items %}
-                                        <tr>
-                                            <th scope="row">{{forloop.counter}}</th>
+                                        <tr class="text-white">
+                                            <td scope="row">{{forloop.counter}}</td>
                                             <td>{{item.product.title|slice:':60'}}</td>
                                             <td>{{item.quantity}}</td>
                                             <td>${{item.product.price|intcomma}}</td>
@@ -76,11 +76,38 @@
 
                         <!-- grand total -->
                         <div class="row">
-                            <div class="col-5 col-md-7 pt-md-5 payment">
+                            <div class="col-5 col-md-8 payment">
+                                <h5 class="pt-md-1 text-primary">Shipment Charges</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="table-responsive">
+                                            <table class="table table-condensed">
+                                                <tbody>
+                                                    <tr class="other-money">
+                                                        <td>Shipment:</td>
+                                                        <td>${{order.shipping_price|intcomma}}</td>
+                                                    </tr>
+                                                    <tr class="other-money">
+                                                        <td>Tax:</td>
+                                                        <td>(0.00 %)</td>
+                                                    </tr>
+                                                    <tr class="total-money">
+                                                        <td><strong>Total:</strong></td>
+                                                        
+                                                        <td><strong>${{order.shipping_price|intcomma}}</strong></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
                                 <h5 class="pt-md-3 text-secondary">Payment Method</h5>
                                 <p class="text-secondary">The headoffice will send the payment instructions to your email, please follow the instructions and send us your payment receipt after making payment for payment verification.</p>
                             </div>
-                            <div class="col-7 col-md-5">
+                            <div class="col-7 col-md-4">
                                 <div class="table-responsive">
                                     <table class="table table-condensed">
                                         <tbody>
@@ -96,10 +123,10 @@
                                                 <td>Advance Paid:</td>
                                                 <td>${{order.paid|intcomma}}</td>
                                             </tr>
-                                            <tr class="other-money">
+                                            <!-- <tr class="other-money">
                                                 <td>Shipping:</td>
                                                 <td>${{order.shipping_price|intcomma}}</td>
-                                            </tr>
+                                            </tr> -->
                                             <tr class="other-money">
                                                 <td>Tax:</td>
                                                 <td>(0.00 %)</td>

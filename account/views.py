@@ -124,6 +124,22 @@ class AddProductView(LoginRequiredMixin, CreateView):
 
 
 @login_required(login_url='account:login')
+def edit_product(request, pk):
+    if not request.user.is_staff:
+        return HttpResponse("Error handler content", status=400)
+    
+    product = Product.objects.get(pk=pk)
+    form = AddProductForm(request.POST or None, instance=product)
+
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'product was updated successfully')
+        return redirect('account:admin_dashboard')
+    return render(request, 'store/edit_product.html', {'form':form})
+
+
+
+@login_required(login_url='account:login')
 def delete_product(request, pk):
     if not request.user.is_staff:
         return HttpResponse("Error handler content", status=400)

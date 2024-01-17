@@ -42,9 +42,9 @@ body{
     background: var(--primary)  !important;
     color: #fff;
 }
-.table-bodyy{
+.table-bodyy td{
     background: #0d0c31bd;
-    color: #fff;
+    color: #fff !important;
 }
 
 .billed-to h4,
